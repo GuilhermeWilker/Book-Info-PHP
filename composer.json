@@ -11,5 +11,7 @@
       "email": "wilkerguilherme0@gmail.com"
     }
   ],
-  "require": {}
+  "require": {
+    "beezus/openlibrary-php": "^1.0"
+  }
 }

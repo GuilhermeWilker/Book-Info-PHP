@@ -1,6 +1,6 @@
 <?php
 
-function load(string $controller, string $controllerAction)
+function load(string $controller, string $controllerAction, array $params = [])
 {
     try {
         $controllerNamespace = "src\\controllers\\{$controller}";
@@ -15,7 +15,7 @@ function load(string $controller, string $controllerAction)
             throw new Exception("O método {$controllerAction} não existe no controller {$controller}");
         }
 
-        $result = $controllerInstance->$controllerAction();
+        $result = call_user_func_array([$controllerInstance, $controllerAction], $params);
 
         return json_encode($result);
     } catch (Exception $e) {
@@ -26,6 +26,7 @@ function load(string $controller, string $controllerAction)
 $routes = [
     'GET' => [
         '/' => fn () => load('HomeController', 'index'),
-        ],
+        '/user/:name' => fn ($name) => load('HomeController', 'show', [$name]),
+    ],
     'POST' => [],
-    ];
+];

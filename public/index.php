@@ -14,16 +14,29 @@ try {
         exit;
     }
 
-    if (!array_key_exists($URI, $routes[$requestMethod])) {
+    $matchedRoute = null;
+    $matchedParams = [];
+
+    foreach ($routes[$requestMethod] as $routePattern => $controller) {
+        $pattern = str_replace('/', '\/', $routePattern);
+        $pattern = preg_replace('/:(\w+)/', '([^\/]+)', $pattern);
+        $pattern = "/^{$pattern}$/";
+
+        if (preg_match($pattern, $URI, $matches)) {
+            $matchedRoute = $controller;
+            $matchedParams = array_slice($matches, 1);
+            break;
+        }
+    }
+
+    if ($matchedRoute === null) {
         echo json_encode(['error' => 'A rota não existe.']);
         exit;
     }
 
-    $controller = $routes[$requestMethod][$URI];
-
-    echo is_callable($controller)
-    ? $controller()
-    : json_encode(['error' => 'Erro ao processar a rota.']);
+    echo is_callable($matchedRoute)
+        ? $matchedRoute(...$matchedParams)
+        : json_encode(['error' => 'Erro ao processar a rota.']);
 } catch (Exception $e) {
-    echo $e->getMessage();
+    echo json_encode(['error' => $e->getMessage()]);
 }

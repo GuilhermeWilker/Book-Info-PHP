@@ -13,4 +13,14 @@ class HomeController
 
         return $data;
     }
+
+    public function show($name)
+    {
+        $data = [
+            'message' => "Nome do usuário é {$name}",
+            'timestamp' => time(),
+        ];
+
+        return $data;
+    }
 }
