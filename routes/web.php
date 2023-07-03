@@ -3,7 +3,8 @@
 $routes = [
     'GET' => [
         '/' => fn () => load('HomeController', 'index'),
-        '/user/:name' => fn ($name) => load('HomeController', 'show', [$name]),
+
+        '/search/book/:title' => fn ($title) => load('BookController', 'searchBooks', [$title]),
     ],
     'POST' => [],
 ];
