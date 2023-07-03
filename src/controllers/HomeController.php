@@ -6,6 +6,11 @@ class HomeController
 {
     public function index()
     {
-        var_dump('index');
+        $data = [
+            'message' => 'Olá, mundo!',
+            'timestamp' => time(),
+        ];
+
+        return $data;
     }
 }
