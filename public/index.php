@@ -2,6 +2,7 @@
 
 require '../vendor/autoload.php';
 require '../routes/web.php';
+require '../routes/load.php';
 
 header('Content-Type: application/json');
 

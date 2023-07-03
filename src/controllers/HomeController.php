@@ -7,7 +7,7 @@ class HomeController
     public function index()
     {
         $data = [
-            'message' => 'Olá, mundo!',
+            'message' => 'Olá, mundo! Você esta usando a API',
             'timestamp' => time(),
         ];
 
