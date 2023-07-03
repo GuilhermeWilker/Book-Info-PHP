@@ -1,0 +1,15 @@
+{
+    "name": "guiga/api-php",
+    "autoload": {
+        "psr-4": {
+            "Guiga\\ApiPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Guilherme Wilker",
+            "email": "wilkerguilherme0@gmail.com"
+        }
+    ],
+    "require": {}
+}
