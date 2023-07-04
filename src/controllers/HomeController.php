@@ -6,19 +6,13 @@ class HomeController
 {
     public function index()
     {
-        $data = [
-            'message' => 'Olá, mundo! Você esta usando a API',
-            'timestamp' => time(),
-        ];
+        $timestamp = time();
+        $formattedDate = date('d/m/Y', $timestamp);
+        $formattedDate = str_replace('/', '-', $formattedDate);
 
-        return $data;
-    }
-
-    public function show($name)
-    {
         $data = [
-            'message' => "Nome do usuário é {$name}",
-            'timestamp' => time(),
+            'message' => 'Olá! Você está usando a Book Plus API -- Leia a documentação para mais informações',
+            'timestamp' => $formattedDate,
         ];
 
         return $data;
