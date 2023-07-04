@@ -6,6 +6,10 @@ require '../vendor/autoload.php';
 require '../routes/web.php';
 require '../routes/load.php';
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+
+header('Access-Control-Allow-Headers: Origin, Content-Type');
 header('Content-Type: application/json');
 
 try {
