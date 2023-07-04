@@ -24,4 +24,31 @@ class BookController
 
         return $books;
     }
+
+    public function searchByCategory(string $category)
+    {
+        $url = 'https://openlibrary.org/subjects/'.urlencode($category).'.json';
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        $works = $data['works'] ?? [];
+
+        $books = [];
+        foreach ($works as $work) {
+            $book = [
+                'title' => $work['title'],
+                'authors' => [],
+            ];
+
+            if (isset($work['authors'])) {
+                foreach ($work['authors'] as $author) {
+                    $book['authors'][] = $author['name'];
+                }
+            }
+
+            $books[] = $book;
+        }
+
+        return $books;
+    }
 }
